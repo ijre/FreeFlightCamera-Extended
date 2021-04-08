@@ -96,5 +96,5 @@ Hooks:Add("MenuManagerInitialize", "FFC_MenuInit", function(MM)
   end
 
   FFC.Ext.Settings:Load()
-  MenuHelper:LoadFromJsonFile(FFC.Ext.Paths.Settings .. "settings.txt", FFC.Ext.Settings, FFC.Ext.Settings.SavedData)
+  MenuHelper:LoadFromJsonFile(FFC.Ext.Paths.Settings .. "menu.txt", FFC.Ext.Settings, FFC.Ext.Settings.SavedData)
 end)
