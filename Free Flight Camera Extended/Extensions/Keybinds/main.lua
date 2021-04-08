@@ -21,7 +21,7 @@ function Binds:OnGameSpeedKeybind(inc)
   FFC:draw_modifiers()
 
   local prevIndex = FFC._modifier_index
-  FFC._modifier_index = 3
+  FFC._modifier_index = 4
 
   if inc then
     FFC:curr_modifier_up()

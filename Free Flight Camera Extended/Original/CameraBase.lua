@@ -123,15 +123,15 @@ function FFC:_setup_modifiers()
 
   local moveRange, moveNum = self.Ext.Settings.Helpers:TranslateValue(ranges.MoveSpeed, saveData.MoveSpeed)
   local sensRange, sensNum = self.Ext.Settings.Helpers:TranslateValue(ranges.MouseSens, saveData.MouseSens)
-  local speedRange, speedNum = self.Ext.Settings.Helpers:TranslateValue(ranges.GameSpeed, 1)
   local fovRange, fovNum = self.Ext.Settings.Helpers:TranslateValue(ranges.FOV, saveData.FOV)
+  local speedRange, speedNum = self.Ext.Settings.Helpers:TranslateValue(ranges.GameSpeed, 1)
 
   local ms = FFM:new("Move Speed", moveRange, moveNum)
   local ts = FFM:new("Mouse Sens", sensRange, sensNum)
-  local gt = FFM:new("Game Speed", speedRange, speedNum, callback(self, self, "set_game_speed"))
   local fov = FFM:new("FOV", fovRange, fovNum, callback(self, self, "set_fov"))
+  local gt = FFM:new("Game Speed", speedRange, speedNum, callback(self, self, "set_game_speed"))
 
-  self._modifiers = {ms,ts,gt,fov}
+  self._modifiers = {ms,ts,fov,gt}
   self._modifier_index = 1
   self._fov = fov
   self._move_speed = ms
