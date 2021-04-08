@@ -42,7 +42,7 @@ FFC.Ext.Settings =
   }
 }
 if table.empty(FFC.Ext.Settings.Ranges.FOV) then
-  for i = 1, 179 do
+  for i = 1, 360 do
     table.insert(FFC.Ext.Settings.Ranges.FOV, i)
   end
 end
