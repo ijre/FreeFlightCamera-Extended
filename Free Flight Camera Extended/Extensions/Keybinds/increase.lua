@@ -1,0 +1,1 @@
+FFC.Ext.Binds:OnGameSpeedKeybind(true)

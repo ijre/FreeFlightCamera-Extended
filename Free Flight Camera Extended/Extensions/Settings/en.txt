@@ -1,0 +1,9 @@
+{
+  "FFC_Title":           "Free Flight Camera Extended",
+  "FFC_Desc":            "Adjust your Free Flight Cam Extended settings",
+  "FFC_HUD_Title":       "Keep Game HUD On",
+  "FFC_HUD_Desc":        "If enabled, the mod won't hide game HUD when Free Cam is turned on",
+  "FFC_MoveSpeed_Title": "Move Speed Default",
+  "FFC_MouseSens_Title": "Mouse Sens Default",
+  "FFC_FOV_Title":       "FOV Default"
+}

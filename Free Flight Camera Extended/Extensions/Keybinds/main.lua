@@ -1,0 +1,91 @@
+local Binds = class(FFC.Ext)
+
+Binds =
+{
+  PreviouslyHeld = "",
+  LastTime = 0
+}
+
+function Binds:SetupToggle(keyParam)
+  local key = keyParam or BLT.Keybinds:get_keybind("FFC_Toggle")
+
+  FFC._camKey = key
+end
+
+function Binds:OnGameSpeedKeybind(inc)
+  if not FFC:enabled() then
+    FFC._workspace:show()
+    FFC._action_vis_time = 0
+  end
+
+  FFC:draw_modifiers()
+
+  local prevIndex = FFC._modifier_index
+  FFC._modifier_index = 3
+
+  if inc then
+    FFC:curr_modifier_up()
+    self.PreviouslyHeld = self.Inc
+  else
+    FFC:curr_modifier_down()
+    self.PreviouslyHeld = self.Dec
+  end
+
+  FFC._modifier_index = prevIndex
+
+  self.LastTime = TimerManager:main():time()
+end
+
+function Binds:ReloadBinds(key, inc)
+  -- BLT's get_keybind() func checks every single keybind in every single mod
+    -- thus this is more efficient
+
+  if not key then
+    self:SetupToggle()
+    self.Inc = BLT.Keybinds:get_keybind("FFC_IncreaseSpeed")
+    self.Dec = BLT.Keybinds:get_keybind("FFC_DecreaseSpeed")
+  elseif inc then
+    self.Inc = key
+  else
+    self.Dec = key
+  end
+end
+Binds:ReloadBinds()
+
+local origSetKey = BLTKeybind._SetKey
+function BLTKeybind:_SetKey(id, key)
+  origSetKey(self, id, key)
+
+  if self:Id() == "FFC_Toggle" then
+    Binds:SetupToggle(self)
+  elseif self:Id() == "FFC_IncreaseSpeed" then
+    Binds:ReloadBinds(self, true)
+  elseif self:Id() == "FFC_DecreaseSpeed" then
+    Binds:ReloadBinds(self, false)
+  end
+end
+
+local path = ModPath
+-- local path = FFC.Ext.Paths.Base
+
+function Binds:CheckHeld(time)
+  if self.LastTime + 0.1 > time then
+    return end
+
+  local incHeld = Input:keyboard():down(Idstring(self.Inc:Key()))
+  local decHeld = Input:keyboard():down(Idstring(self.Dec:Key()))
+
+  local b = (not (incHeld and decHeld) and (incHeld and self.Inc or decHeld and self.Dec)) or nil
+
+  if b == nil or self.PreviouslyHeld ~= b then
+    goto ret end
+
+  dofile(path .. b:File())
+
+  self.LastTime = time
+
+  ::ret::
+  self.PreviouslyHeld = b
+end
+
+FFC.Ext.Binds = Binds

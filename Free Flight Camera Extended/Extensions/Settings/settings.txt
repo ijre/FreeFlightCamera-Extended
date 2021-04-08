@@ -1,0 +1,50 @@
+{
+  "menu_id":        "FFC_E",
+  "parent_menu_id": "blt_options",
+  "title":          "FFC_Title",
+  "description":    "FFC_Desc",
+  "items":
+  [
+    {
+      "type":         "toggle",
+      "id":           "FFC_HUD",
+      "title":        "FFC_HUD_Title",
+      "description":  "FFC_HUD_Desc",
+      "callback":     "FFC_OnHUD",
+      "value":        "KeepHUD"
+    },
+    {
+      "type":     "slider",
+      "id":       "FFC_MoveSpeed",
+      "title":    "FFC_MoveSpeed_Title",
+      "callback": "FFC_OnMoveSpeed",
+      "value":    "MoveSpeed",
+      "default_value":  "2",
+      "min":      "0.01",
+      "max":      "10",
+      "step":     "0.01"
+    },
+    {
+      "type":     "slider",
+      "id":       "FFC_MouseSens",
+      "title":    "FFC_MouseSens_Title",
+      "callback": "FFC_OnMouseSens",
+      "value":    "MouseSens",
+      "default_value":  "3",
+      "min":      "1",
+      "max":      "10",
+      "step":     "0.5"
+    },
+    {
+      "type":     "slider",
+      "id":       "FFC_FOV",
+      "title":    "FFC_FOV_Title",
+      "callback": "FFC_OnFOV",
+      "value":    "FOV",
+      "default_value":  "90",
+      "min":      "1",
+      "max":      "179",
+      "step":     "1"
+    }
+  ]
+}

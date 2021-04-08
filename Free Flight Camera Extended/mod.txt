@@ -1,0 +1,51 @@
+{
+  "name": "Free Flight Camera Extended",
+  "author": "Luffy, extended by ijre",
+  "contact": "https://github.com/ijre/FreeFlightCamera-Extended",
+  "hooks":
+  [
+    {
+      "hook_id": "lib/network/base/networkpeer",
+      "script_path": "Original/NetworkPeer.lua"
+    },
+    {
+      "hook_id": "lib/setups/gamesetup",
+      "script_path": "Original/CameraBase.lua"
+    },
+    {
+      "hook_id": "lib/setups/gamesetup",
+      "script_path": "Extensions/main.lua"
+    },
+    {
+      "hook_id": "lib/managers/menumanager",
+      "script_path": "Extensions/Settings/settings.lua"
+    }
+  ],
+  "keybinds":
+  [
+    {
+      "keybind_id": "FFC_Toggle",
+      "name": "Toggle Free Camera",
+      "script_path": "Extensions/Keybinds/toggle.lua",
+      "run_in_game": true
+    },
+    {
+      "keybind_id": "FFC_IncreaseSpeed",
+      "name": "Increase Game Speed",
+      "script_path": "Extensions/Keybinds/increase.lua",
+      "run_in_game": true
+    },
+    {
+      "keybind_id": "FFC_DecreaseSpeed",
+      "name": "Decrease Game Speed",
+      "script_path": "Extensions/Keybinds/decrease.lua",
+      "run_in_game": true
+    },
+    {
+      "keybind_id": "FFC_ResetSpeed",
+      "name": "Reset Game Speed",
+      "script_path": "Extensions/Keybinds/reset.lua",
+      "run_in_game": true
+    }
+  ]
+}
