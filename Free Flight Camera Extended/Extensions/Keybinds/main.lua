@@ -9,7 +9,7 @@ Binds =
 function Binds:SetupToggle(keyParam)
   local key = keyParam or BLT.Keybinds:get_keybind("FFC_Toggle")
 
-  FFC._camKey = key
+  FFC.camKey = key
 end
 
 function Binds:OnGameSpeedKeybind(inc)
