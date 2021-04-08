@@ -180,6 +180,7 @@ function FFC:pause_game()
 end
 
 function FFC:quick_action_execute()
+  self:draw_actions()
   self:current_action():do_action()
 end
 
@@ -193,24 +194,22 @@ function FFC:next_modifier_toggle()
 end
 
 function FFC:curr_modifier_up()
-  if self:modifiers_are_visible() then
-    self:current_modifier():step_up()
-    self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
-    local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
-    self._modifier_gui[self._modifier_index]:set_size(w + 2, h + 2)
-    self._modifier_gui[self._modifier_index]:set_world_right(self._panel:world_right() - 45)
-  end
+  self:current_modifier():step_up()
+  self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
+  local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
+  self._modifier_gui[self._modifier_index]:set_size(w + 2, h + 2)
+  self._modifier_gui[self._modifier_index]:set_world_right(self._panel:world_right() - 45)
+
   self:draw_modifiers()
 end
 
 function FFC:curr_modifier_down()
-  if self:modifiers_are_visible() then
-    self:current_modifier():step_down()
-    self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
-    local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
-    self._modifier_gui[self._modifier_index]:set_size(w + 2,h + 2)
-    self._modifier_gui[self._modifier_index]:set_world_right(self._panel:world_right() - 45)
-  end
+  self:current_modifier():step_down()
+  self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
+  local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
+  self._modifier_gui[self._modifier_index]:set_size(w + 2,h + 2)
+  self._modifier_gui[self._modifier_index]:set_world_right(self._panel:world_right() - 45)
+
   self:draw_modifiers()
 end
 
@@ -265,10 +264,8 @@ function FFC:action_toggle()
 end
 
 function FFC:action_execute()
-  if self:actions_are_visible() then
-    self:current_action():do_action()
-  end
   self:draw_actions()
+  self:current_action():do_action()
 end
 
 function FFC:show_key_pressed()
