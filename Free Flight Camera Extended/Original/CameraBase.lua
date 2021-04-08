@@ -373,6 +373,7 @@ function FFC:update_camera(t, dt)
   local move_delta = move_dir * self._move_speed:value() * MOVEMENT_SPEED_BASE * dt
   local pos_new = self._camera_pos + move_delta
   local yaw_new = self._camera_rot:yaw() + axis_look.x * -1 * self._turn_speed:value() * TURN_SPEED_BASE
+---@diagnostic disable-next-line: undefined-field
   local pitch_new = math.clamp(self._camera_rot:pitch() + axis_look.y * self._turn_speed:value() * TURN_SPEED_BASE, PITCH_LIMIT_MIN, PITCH_LIMIT_MAX)
   local rot_new = Rotation(yaw_new, pitch_new, 0)
   if not CoreApp.arg_supplied("-vpslave") then
