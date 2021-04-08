@@ -51,7 +51,7 @@ if table.empty(FFC.Ext.Settings.SavedData) then
   FFC.Ext.Settings.SavedData = FFC.Ext.Settings.Defaults
 end
 
-dofile(settingsPath .. "settingsHelpers.lua")
+dofile(settingsPath .. "helpers.lua")
 
 function FFC.Ext.Settings:Load()
   local file = io.open(savePath, "r")
