@@ -47,5 +47,15 @@
       "script_path": "Extensions/Keybinds/reset.lua",
       "run_in_game": true
     }
+  ],
+  "updates":
+  [
+    {
+      "identifier": "FFC-E",
+      "host":
+      {
+        "meta": "https://github.com/ijre/FreeFlightCamera-Extended/releases/download/FFC-E/meta.json"
+      }
+    }
   ]
 }
