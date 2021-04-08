@@ -34,7 +34,6 @@ function FFC:init()
   self._con:add_trigger("freeflight_modifier_toggle", callback(self, self, "next_modifier_toggle"))
   self._con:add_trigger("freeflight_modifier_up", callback(self, self, "curr_modifier_up"))
   self._con:add_trigger("freeflight_modifier_down", callback(self, self, "curr_modifier_down"))
-  self.camKey = ""
 end
 
 function FFC:setup_gui()
@@ -145,7 +144,7 @@ function FFC:_setup_actions()
 
   local ps = FFAT:new("Pause", "Unpause", callback(self, self, "pause_game"), callback(self, self, "unpause_game"))
   local dp = FFA:new("Drop Player", callback(self, self, "drop_player"))
-  local yc = FFA:new(string.format("Yield Control (%s Exit)", self.camKey), callback(self, self, "yield_control"))
+  local yc = FFA:new(self.Ext.Binds:GetYieldText(), callback(self, self, "yield_control"))
   local ef = FFA:new("Close", callback(self, self, "disable"))
 
   self._actions = {ps,dp,yc,ef}

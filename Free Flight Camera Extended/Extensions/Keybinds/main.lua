@@ -6,10 +6,10 @@ Binds =
   LastTime = 0
 }
 
-function Binds:SetupToggle(keyParam)
-  local key = keyParam or BLT.Keybinds:get_keybind("FFC_Toggle")
+function Binds:GetYieldText()
+  local key = self.Toggle:Key()
 
-  FFC.camKey = key
+  return string.format("Yield Control (%s Exit)", string.gsub(key, "^%l", string.upper))
 end
 
 function Binds:OnGameSpeedKeybind(inc)
@@ -36,15 +36,17 @@ function Binds:OnGameSpeedKeybind(inc)
   self.LastTime = TimerManager:main():time()
 end
 
-function Binds:ReloadBinds(key, inc)
+function Binds:ReloadBinds(key, keyInd)
   -- BLT's get_keybind() func checks every single keybind in every single mod
     -- thus this is more efficient
 
   if not key then
-    self:SetupToggle()
+    self.Toggle = BLT.Keybinds:get_keybind("FFC_Toggle")
     self.Inc = BLT.Keybinds:get_keybind("FFC_IncreaseSpeed")
     self.Dec = BLT.Keybinds:get_keybind("FFC_DecreaseSpeed")
-  elseif inc then
+  elseif keyInd == 0 then
+    self.Toggle = key
+  elseif keyInd == 1 then
     self.Inc = key
   else
     self.Dec = key
@@ -57,11 +59,12 @@ function BLTKeybind:_SetKey(id, key)
   origSetKey(self, id, key)
 
   if self:Id() == "FFC_Toggle" then
-    Binds:SetupToggle(self)
+    Binds:ReloadBinds(self, 0)
+    FFC._actions[3]._name = Binds:GetYieldText()
   elseif self:Id() == "FFC_IncreaseSpeed" then
-    Binds:ReloadBinds(self, true)
+    Binds:ReloadBinds(self, 1)
   elseif self:Id() == "FFC_DecreaseSpeed" then
-    Binds:ReloadBinds(self, false)
+    Binds:ReloadBinds(self, 2)
   end
 end
 
