@@ -193,6 +193,15 @@ function FFC:next_modifier_toggle()
   self:draw_modifiers()
 end
 
+function FFC:RedrawModifierText(index)
+  local modifier = self._modifiers[index]
+
+  self._modifier_gui[index]:child(0):set_text(modifier:name_value())
+  local _,_,w,h = self._modifier_gui[index]:child(0):text_rect()
+  self._modifier_gui[index]:set_size(w + 2, h + 2)
+  self._modifier_gui[index]:set_world_right(self._panel:world_right() - 45)
+end
+
 function FFC:curr_modifier_up()
   if self._modifier_index ~= 4 then
     self._modifiers[self._modifier_index]._index = self.Ext.Settings.Helpers:CheckCustomValues(self:current_modifier(), true)
@@ -200,10 +209,7 @@ function FFC:curr_modifier_up()
     self:current_modifier():step_up()
   end
 
-  self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
-  local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
-  self._modifier_gui[self._modifier_index]:set_size(w + 2, h + 2)
-  self._modifier_gui[self._modifier_index]:set_world_right(self._panel:world_right() - 45)
+  self:RedrawModifierText(self._modifier_index)
 
   self:draw_modifiers()
 end
@@ -215,10 +221,7 @@ function FFC:curr_modifier_down()
     self:current_modifier():step_down()
   end
 
-  self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
-  local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
-  self._modifier_gui[self._modifier_index]:set_size(w + 2,h + 2)
-  self._modifier_gui[self._modifier_index]:set_world_right(self._panel:world_right() - 45)
+  self:RedrawModifierText(self._modifier_index)
 
   self:draw_modifiers()
 end
