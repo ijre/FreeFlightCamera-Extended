@@ -13,12 +13,7 @@ function Binds:GetYieldText()
 end
 
 function Binds:OnGameSpeedKeybind(inc)
-  if not FFC:enabled() then
-    FFC._workspace:show()
-    FFC._action_vis_time = 0
-  end
-
-  FFC:draw_modifiers()
+  FFC.Ext.GUI:ShowModifiers()
 
   local prevIndex = FFC._modifier_index
   FFC._modifier_index = 4
@@ -71,7 +66,7 @@ end
 local path = ModPath
 
 function Binds:CheckHeld(time)
-  if self.LastTime + 0.1 > time then
+  if self.LastTime + 0.13 > time then
     return end
 
   local incHeld = Input:keyboard():down(Idstring(self.Inc:Key()))
