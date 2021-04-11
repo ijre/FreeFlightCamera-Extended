@@ -38,7 +38,14 @@ FFC.Ext.Settings =
     MoveSpeed = { 0.01, 0.02, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
     MouseSens = { 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10 },
     FOV = { },
-    GameSpeed = { 0.1, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 10 }
+    GameSpeed = { 0.01, 0.1, 0.5, 0.8, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 10, 15, 20 },
+
+    CustomRanges =
+    {
+      { },
+      { },
+      { }
+    }
   }
 }
 if table.empty(FFC.Ext.Settings.Ranges.FOV) then
@@ -75,23 +82,25 @@ function FFC.Ext.Settings:Save()
 end
 
 Hooks:Add("MenuManagerInitialize", "FFC_MenuInit", function(MM)
+  local Helpers = FFC.Ext.Settings.Helpers
+
   MenuCallbackHandler.FFC_OnHUD = function(self, option)
     FFC.Ext.Settings.SavedData.KeepHUD = option:value() == "on"
     FFC.Ext.Settings:Save()
   end
 
   MenuCallbackHandler.FFC_OnMoveSpeed = function(self, option)
-    FFC.Ext.Settings.SavedData.MoveSpeed = option:value()
+    FFC.Ext.Settings.SavedData.MoveSpeed = Helpers:SnipDecimals(option:value())
     FFC.Ext.Settings:Save()
   end
 
   MenuCallbackHandler.FFC_OnMouseSens = function(self, option)
-    FFC.Ext.Settings.SavedData.MouseSens = option:value()
+    FFC.Ext.Settings.SavedData.MouseSens = Helpers:SnipDecimals(option:value())
     FFC.Ext.Settings:Save()
   end
 
   MenuCallbackHandler.FFC_OnFOV = function(self, option)
-    FFC.Ext.Settings.SavedData.FOV = option:value()
+    FFC.Ext.Settings.SavedData.FOV = Helpers:SnipDecimals(option:value())
     FFC.Ext.Settings:Save()
   end
 
