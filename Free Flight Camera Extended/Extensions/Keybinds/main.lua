@@ -69,7 +69,6 @@ function BLTKeybind:_SetKey(id, key)
 end
 
 local path = ModPath
--- local path = FFC.Ext.Paths.Base
 
 function Binds:CheckHeld(time)
   if self.LastTime + 0.1 > time then
