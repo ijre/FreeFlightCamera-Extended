@@ -46,6 +46,18 @@
       "name": "Reset Game Speed",
       "script_path": "Extensions/Keybinds/reset.lua",
       "run_in_game": true
+    },
+    {
+      "keybind_id": "FFC_MaxSpeed",
+      "name": "Set Game Speed To Max",
+      "script_path": "Free Flight Camera Extended/Extensions/Keybinds/max.lua",
+      "run_in_game": true
+    },
+    {
+      "keybind_id": "FFC_MinSpeed",
+      "name": "Set Game Speed To Min",
+      "script_path": "Free Flight Camera Extended/Extensions/Keybinds/min.lua",
+      "run_in_game": true
     }
   ],
   "updates":
