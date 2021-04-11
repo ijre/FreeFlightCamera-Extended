@@ -10,10 +10,11 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
-    - name: Delete Existing Release
-      uses: ame-yu/action-delete-latest-release@v2
+    - name: Delete Release
+      uses: larryjoelane/delete-release-action@v1.0.24
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        release-name: FFC-E
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Archive Mod
       run: |
          .\.github\7za.exe -tzip a ".\FFC-E.zip" ".\Free Flight Camera Extended"
