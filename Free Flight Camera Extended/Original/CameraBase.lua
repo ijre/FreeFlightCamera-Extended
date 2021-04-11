@@ -121,10 +121,10 @@ function FFC:_setup_modifiers()
   local ranges = self.Ext.Settings.Ranges
   local saveData = self.Ext.Settings.SavedData
 
-  local moveRange, moveNum = self.Ext.Settings.Helpers:TranslateValue(ranges.MoveSpeed, saveData.MoveSpeed)
-  local sensRange, sensNum = self.Ext.Settings.Helpers:TranslateValue(ranges.MouseSens, saveData.MouseSens)
-  local fovRange, fovNum = self.Ext.Settings.Helpers:TranslateValue(ranges.FOV, saveData.FOV)
-  local speedRange, speedNum = self.Ext.Settings.Helpers:TranslateValue(ranges.GameSpeed, 1)
+  local moveRange, moveNum = self.Ext.Settings.Helpers:TranslateValue(ranges.MoveSpeed, saveData.MoveSpeed, 1)
+  local sensRange, sensNum = self.Ext.Settings.Helpers:TranslateValue(ranges.MouseSens, saveData.MouseSens, 2)
+  local fovRange, fovNum = self.Ext.Settings.Helpers:TranslateValue(ranges.FOV, saveData.FOV, 3)
+  local speedRange, speedNum = self.Ext.Settings.Helpers:TranslateValue(ranges.GameSpeed, 1, nil)
 
   local ms = FFM:new("Move Speed", moveRange, moveNum)
   local ts = FFM:new("Mouse Sens", sensRange, sensNum)
@@ -194,7 +194,12 @@ function FFC:next_modifier_toggle()
 end
 
 function FFC:curr_modifier_up()
-  self:current_modifier():step_up()
+  if self._modifier_index ~= 4 then
+    self._modifiers[self._modifier_index]._index = self.Ext.Settings.Helpers:CheckCustomValues(self:current_modifier(), true)
+  else
+    self:current_modifier():step_up()
+  end
+
   self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
   local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
   self._modifier_gui[self._modifier_index]:set_size(w + 2, h + 2)
@@ -204,7 +209,12 @@ function FFC:curr_modifier_up()
 end
 
 function FFC:curr_modifier_down()
-  self:current_modifier():step_down()
+  if self._modifier_index ~= 4 then
+    self._modifiers[self._modifier_index]._index = self.Ext.Settings.Helpers:CheckCustomValues(self:current_modifier(), false)
+  else
+    self:current_modifier():step_down()
+  end
+
   self._modifier_gui[self._modifier_index]:child(0):set_text(self:current_modifier():name_value())
   local _,_,w,h = self._modifier_gui[self._modifier_index]:child(0):text_rect()
   self._modifier_gui[self._modifier_index]:set_size(w + 2,h + 2)
