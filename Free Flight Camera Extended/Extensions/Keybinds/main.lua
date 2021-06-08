@@ -7,7 +7,7 @@ Binds =
 }
 
 function Binds:GetYieldText()
-  local key = self.Toggle:Key()
+  local key = self.Toggle:Key() or ""
 
   return string.format("Yield Control (%s Exit)", string.gsub(key, "^%l", string.upper))
 end
@@ -69,8 +69,8 @@ function Binds:CheckHeld(time)
   if self.LastTime + 0.13 > time then
     return end
 
-  local incHeld = Input:keyboard():down(Idstring(self.Inc:Key()))
-  local decHeld = Input:keyboard():down(Idstring(self.Dec:Key()))
+  local incHeld = self.Inc and Input:keyboard():down(Idstring(self.Inc:Key() or ""))
+  local decHeld = self.Dec and Input:keyboard():down(Idstring(self.Dec:Key() or ""))
 
   local b = (not (incHeld and decHeld) and (incHeld and self.Inc or decHeld and self.Dec)) or nil
 
