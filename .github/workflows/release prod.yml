@@ -2,8 +2,7 @@ name: Create PAYDAY mod release
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+
 jobs:
   build:
     runs-on: windows-latest
@@ -16,7 +15,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Archive Mod
       run: |
-         .\.github\7za.exe a ".\FFC-E.7z" ".\Free Flight Camera Extended"
+         .\.github\7za.exe -tzip a ".\FFC-E.zip" ".\Free Flight Camera Extended"
       shell: powershell
     - name: Create New Release
       id: create_release
@@ -37,8 +36,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-        asset_path: ./FFC-E.7z
-        asset_name: FFC-E.7z
+        asset_path: ./FFC-E.zip
+        asset_name: FFC-E.zip
         asset_content_type: application/zip
     - name: Hash mod and create mod meta file
       id: create_meta_file
